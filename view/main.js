@@ -13,10 +13,16 @@ const main = () => {
             component: 'home-page'
         },
         {
+            path: '/tables',
+            component: 'table-page'
+        },
+        {
             path: '(.*)',
             component: 'page-notfound'
         }
     ]);
+
+
 
 }
 

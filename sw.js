@@ -1,4 +1,4 @@
-const CACHE_NAME = "englisharena-3";
+const CACHE_NAME = "englisharena-6";
 
 const fileToCache = [
     './',
@@ -6,8 +6,10 @@ const fileToCache = [
     './app.js',
     './components/home-page.js',
     './components/page-notfound.js',
+    './components/table-page.js',
     './view/main.js',
     './js/materialize.min.js',
+    './js/data-api.js',
     './js/vaadin-router.js',
     './css/materialize.min.css',
     './css/own-style.css',
@@ -44,3 +46,15 @@ self.addEventListener('fetch', event => {
         })
     )
 })
+
+self.addEventListener("activate", e => {
+    e.waitUntil(
+        caches.keys().then(keylist => {
+            return Promise.all(keylist.map(key => {
+                if (key !== CACHE_NAME) {
+                    return caches.delete(key);
+                }
+            }))
+        })
+    )
+});

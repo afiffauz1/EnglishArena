@@ -1,22 +1,22 @@
-// class DataApi {
-//     baseUrl = "https://api.football-data.org/v2/";
-//     static tables() {
-//         return fetch(`${baseUrl}competitions/2021/standings`, {
-//                 method: 'GET',
-//                 headers: {
-//                     "X-Auth-Token": "c371638cb83f429883750ca90f84710e"
-//                 }
-//             })
-//             .then(response => response.json())
-//             .then(responseJson => {
-//                 if (responseJson.standings[0].table) {
-//                     return Promise.resolve(responseJson.standings[0].table)
-//                 } else {
-//                     return Promise.reject("Data not found !!!")
-//                 }
-//             })
-//             .catch(error => Promise.reject(error));
-//     }
-// }
+class DataApi {
 
-// export default DataApi;
+    static tables() {
+        return fetch(`https://api.football-data.org/v2/competitions/2021/standings`, {
+                method: 'GET',
+                headers: {
+                    "X-Auth-Token": "c371638cb83f429883750ca90f84710e"
+                }
+            })
+            .then(response => {
+                if (response) {
+                    return Promise.resolve(response)
+                } else {
+                    return Promise.reject("Data not found !!!")
+                }
+            })
+            .then(response => response.json())
+
+    }
+}
+
+export default DataApi;
