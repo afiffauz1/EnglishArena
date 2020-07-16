@@ -17,6 +17,10 @@ const main = () => {
             component: 'table-page'
         },
         {
+            path: '/teams',
+            component: 'teams-page'
+        },
+        {
             path: '(.*)',
             component: 'page-notfound'
         }

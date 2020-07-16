@@ -9,15 +9,13 @@ class TablePage extends HTMLElement {
     }
 
     connectedCallback() {
-        this.loaderUI();
+        this.loadingScreen();
         this.dataTables();
     }
 
     async dataTables() {
-
-
         const dataClub = await DataApi.getTables();
-        let clubList = "";
+        let tableList = "";
         dataClub.standings[0].table.forEach(club => {
             const {
                 position,
@@ -31,7 +29,7 @@ class TablePage extends HTMLElement {
                 goalsAgainst,
                 goalDifference
             } = club;
-            clubList += `
+            tableList += `
                 <tr>
                     <td>${position}</td>
                     <th>${team.name}</th>
@@ -47,10 +45,10 @@ class TablePage extends HTMLElement {
             `
         });
 
-        this.tablesUI(clubList);
+        this.tablesUI(tableList);
     }
 
-    tablesUI(clubList) {
+    tablesUI(tableList) {
         this.shadow.innerHTML = `
         <link rel="stylesheet" href="../css/materialize.min.css" type="text/css">
         <h1>Premier League <span class="grey-text darken-1">Table</span></h1>
@@ -58,7 +56,7 @@ class TablePage extends HTMLElement {
             <thead>
                 <tr>
                     <th>Position</th>
-                    <th>Club</th>
+                    <th>Team</th>
                     <th>Played</th>
                     <th>Won</th>
                     <th>Drawn</th>
@@ -70,13 +68,13 @@ class TablePage extends HTMLElement {
                 </tr>
             </thead>
             <tbody>
-                ${clubList}
+                ${tableList}
             </tbody>
         </table>
         `
     }
 
-    loaderUI() {
+    loadingScreen() {
         this.shadow.innerHTML = `
         <link rel="stylesheet" href="../css/own-style.css" type="text/css">
         <link rel="stylesheet" href="../css/materialize.min.css" type="text/css">
