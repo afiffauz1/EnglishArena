@@ -35,8 +35,8 @@ class Homepage extends HTMLElement {
                     <img class="activator" src="../img/banner-squad.jpg">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Teams</span>
-                    <p><a href="/teams">Discover More</a></p>
+                    <span class="card-title activator grey-text text-darken-4">Clubs</span>
+                    <p><a href="/clubs">Discover More</a></p>
                 </div>
             </div>
         </div>

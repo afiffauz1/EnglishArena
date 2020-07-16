@@ -9,11 +9,11 @@ class TablePage extends HTMLElement {
     }
 
     connectedCallback() {
-        this.getTable();
+        this.dataTables();
     }
 
-    async getTable() {
-        const dataClub = await DataApi.tables();
+    async dataTables() {
+        const dataClub = await DataApi.getTables();
         let clubList = "";
         dataClub.standings[0].table.forEach(club => {
             const {
@@ -50,7 +50,7 @@ class TablePage extends HTMLElement {
     tablesUI(clubList) {
         this.shadow.innerHTML = `
         <link rel="stylesheet" href="../css/materialize.min.css" type="text/css">
-
+        <h1>Premier League <span class="grey-text darken-1">Table</span></h1>
         <table class="striped table-container">
             <thead>
                 <tr>
