@@ -10,3 +10,18 @@
     background-position: center;
     background-size: cover;
 }
+
+.loader {
+    opacity: 0;
+    animation: loadingUI 1s linear infinite;
+}
+
+@keyframes loadingUI {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

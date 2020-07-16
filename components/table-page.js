@@ -9,10 +9,13 @@ class TablePage extends HTMLElement {
     }
 
     connectedCallback() {
+        this.loaderUI();
         this.dataTables();
     }
 
     async dataTables() {
+
+
         const dataClub = await DataApi.getTables();
         let clubList = "";
         dataClub.standings[0].table.forEach(club => {
@@ -70,6 +73,14 @@ class TablePage extends HTMLElement {
                 ${clubList}
             </tbody>
         </table>
+        `
+    }
+
+    loaderUI() {
+        this.shadow.innerHTML = `
+        <link rel="stylesheet" href="../css/own-style.css" type="text/css">
+        <link rel="stylesheet" href="../css/materialize.min.css" type="text/css">
+        <h3 class="center loader">Please wait...</h3>
         `
     }
 }
