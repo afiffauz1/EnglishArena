@@ -1,5 +1,4 @@
 import DataApi from '../js/data-api.js';
-import "./profile-page.js";
 
 class TeamsPage extends HTMLElement {
     constructor() {
@@ -35,6 +34,7 @@ class TeamsPage extends HTMLElement {
                         </div>
                         <div class="card-action">
                         <a class='btn profile-team purple darken-4' data-teamId="${id}">Team Profile</a>
+                        <a class='btn player-team purple darken-4' data-teamId="${id}">Players</a>
                       </div>
                     </div>
                 </div>
@@ -59,6 +59,7 @@ class TeamsPage extends HTMLElement {
                         <div class="btn red accent-2" id="btn-close">Close</div>
                     </div>
                     <div id="modal-content"></div>
+                    <div id="modal-card-container" class="row"></div>
                     
                 </div>
 
@@ -66,78 +67,20 @@ class TeamsPage extends HTMLElement {
         `;
 
         const btnProfile = this.shadow.querySelectorAll('.profile-team');
+        const btnPlayer = this.shadow.querySelectorAll('.player-team');
+
         const modalElement = this.shadow.querySelector('#modal-detail');
         const modalContentContainer = this.shadow.querySelector('#modal-content');
-
-        btnProfile.forEach(team => {
-
-            team.addEventListener('click', async function () {
-
-                modalElement.style.display = "block"
-
-                const teamid = team.getAttribute('data-teamId');
-                const getProfileTeam = await DataApi.getProfileTeam(teamid);
+        const modalCardContainer = this.shadow.querySelector('#modal-card-container');
 
 
-                const {
-                    name,
-                    crestUrl,
-                    venue,
-                    founded,
-                    address,
-                    clubColors,
-                    website
-                } = getProfileTeam;
-
-                let modalContent = "";
-                modalContent = `
-                <h2 class="header">${name}</h2>
-                <div class="card horizontal medium">
-                  <div class="card-image">
-                    <img src="${crestUrl}">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      
-                    <table class="responsive-table">
-                        <tbody>
-                        <tr>
-                            <th>Homefield</th>
-                            <td>${venue}</td>
-                        </tr>
-                        <tr>
-                            <th>Founded</th>
-                            <td>${founded}</td>
-                        </tr>
-                        <tr>
-                            <th>Team Colors</th>
-                            <td>${clubColors}</td>
-                        </tr>
-                        <tr>
-                            <th>Address</th>
-                            <td>${address}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="${website}" target="_blank" class="btn green darken-1">Visit Official Website</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    </div>
-                  </div>
-                </div>
-                `
-
-                modalContentContainer.innerHTML = modalContent;
-            });
-        });
-
-
+        btnProfile.forEach(team => this.detailTeam(team));
+        btnPlayer.forEach(player => this.playerList(player));
 
         const btnClose = this.shadow.querySelector("#btn-close");
         btnClose.addEventListener('click', function () {
+            modalContentContainer.innerHTML = "";
+            modalCardContainer.innerHTML = "";
             modalElement.style.display = "none";
         })
 
@@ -150,6 +93,111 @@ class TeamsPage extends HTMLElement {
         <h3 class="center loader">Please wait...</h3>
         `;
     }
+
+    detailTeam(team) {
+        const modalElement = this.shadow.querySelector('#modal-detail');
+        const modalContentContainer = this.shadow.querySelector('#modal-content');
+
+        team.addEventListener('click', async function () {
+            modalElement.style.display = "block"
+            const teamid = team.getAttribute('data-teamId');
+            const getProfileTeam = await DataApi.getProfileTeam(teamid);
+
+
+            const {
+                name,
+                crestUrl,
+                venue,
+                founded,
+                address,
+                clubColors,
+                website
+            } = getProfileTeam;
+
+            let modalContent = "";
+            modalContent = `
+            <h2 class="header">${name} - <span class="grey-text darken-1">Team Profile</span></h2>
+            <div class="card horizontal medium">
+              <div class="card-image">
+                <img src="${crestUrl}">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  
+                <table class="responsive-table">
+                    <tbody>
+                    <tr>
+                        <th>Homefield</th>
+                        <td>${venue}</td>
+                    </tr>
+                    <tr>
+                        <th>Founded</th>
+                        <td>${founded}</td>
+                    </tr>
+                    <tr>
+                        <th>Team Colors</th>
+                        <td>${clubColors}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>${address}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="${website}" target="_blank" class="btn green darken-1">Visit Official Website</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                </div>
+              </div>
+            </div>
+            `
+
+            modalContentContainer.innerHTML = modalContent;
+        });
+    }
+
+    playerList(player) {
+        const modalElement = this.shadow.querySelector('#modal-detail');
+        const modalCardContainer = this.shadow.querySelector('#modal-card-container');
+
+        player.addEventListener('click', async function () {
+            modalElement.style.display = "block"
+            const teamid = player.getAttribute('data-teamId');
+            const getProfileTeam = await DataApi.getProfileTeam(teamid);
+
+            let cardContent = "";
+
+            getProfileTeam.squad.forEach(player => {
+
+                const {
+                    name,
+                    shirtNumber,
+                    position,
+                    nationality,
+                    dateOfBirth
+                } = player;
+
+                cardContent += `
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4"><strong>${name}</strong></span>
+                            <span class="card-title grey-text text-darken-4">${shirtNumber}</span>
+                            <span class="card-title grey-text text-darken-4">${position}</span>
+                            <p><strong>Nationality:</strong> ${nationality}</p>
+                        </div>
+                    </div>
+                </div>
+                `
+            });
+
+            modalCardContainer.innerHTML = cardContent;
+        });
+    }
+
 }
 
 customElements.define('teams-page', TeamsPage);

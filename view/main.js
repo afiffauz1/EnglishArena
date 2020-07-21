@@ -21,10 +21,6 @@ const main = () => {
             component: 'teams-page'
         },
         {
-            path: '/teams/:id',
-            component: 'profile-page'
-        },
-        {
             path: '(.*)',
             component: 'page-notfound'
         }
