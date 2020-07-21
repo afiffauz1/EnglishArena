@@ -24,7 +24,7 @@ class Homepage extends HTMLElement {
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Tables</span>
-                    <p><a href="/tables">Discover More</a></p>
+                    <p><a class="btn pink lighten-2" href="/tables">Discover More</a></p>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@ class Homepage extends HTMLElement {
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Teams</span>
-                    <p><a href="/teams">Discover More</a></p>
+                    <p><a class="btn pink lighten-2" href="/teams">Discover More</a></p>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@ class Homepage extends HTMLElement {
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Favorites</span>
-                    <p><a href="/favorites">Discover More</a></p>
+                    <p><a class="btn pink lighten-2" href="/favorites">Discover More</a></p>
                 </div>
             </div>
         </div>
