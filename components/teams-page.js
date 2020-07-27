@@ -25,12 +25,13 @@ class TeamsPage extends HTMLElement {
 
             teamList += `
                 <div class="col s12 m4">
-                    <div class="card medium">
+                    <div class="card large">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img src="${crestUrl}">
                         </div>
                         <div class="card-content">
                             <span class="card-title grey-text text-darken-4">${name}</span>
+                            <a class="btn pink lighten-2 addFavorite" data-teamId="${id}">Add Favorite</a>
                         </div>
                         <div class="card-action">
                         <a class='btn profile-team purple darken-4' data-teamId="${id}">Team Profile</a>
@@ -47,6 +48,7 @@ class TeamsPage extends HTMLElement {
     cardContainer(team) {
         this.shadow.innerHTML = `
             <link rel="stylesheet" href="../css/materialize.min.css" type="text/css">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link rel="stylesheet" href="../css/own-style.css">
 
             <h1>Premier League <span class="grey-text darken-1">Teams</span></h1>
@@ -68,6 +70,7 @@ class TeamsPage extends HTMLElement {
 
         const btnProfile = this.shadow.querySelectorAll('.profile-team');
         const btnPlayer = this.shadow.querySelectorAll('.player-team');
+        const addFavorite = this.shadow.querySelectorAll('.addFavorite');
 
         const modalElement = this.shadow.querySelector('#modal-detail');
         const modalContentContainer = this.shadow.querySelector('#modal-content');
@@ -76,6 +79,9 @@ class TeamsPage extends HTMLElement {
 
         btnProfile.forEach(team => this.detailTeam(team));
         btnPlayer.forEach(player => this.playerList(player));
+
+        ////untuk save ke database
+        addFavorite.forEach(team => this.addTeamToFavorite(team))
 
         const btnClose = this.shadow.querySelector("#btn-close");
         btnClose.addEventListener('click', function () {
@@ -92,6 +98,16 @@ class TeamsPage extends HTMLElement {
         <link rel="stylesheet" href="../css/materialize.min.css" type="text/css">
         <h3 class="center loader">Please wait...</h3>
         `;
+    }
+
+    addTeamToFavorite(team) {
+
+        team.addEventListener("click", async function () {
+            const teamId = team.getAttribute('data-teamId');
+            const getTeam = await DataApi.getProfileTeam(teamId);
+            addTeam(getTeam);
+        })
+
     }
 
     detailTeam(team) {
