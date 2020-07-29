@@ -61,7 +61,6 @@ class TeamsPage extends HTMLElement {
                         <div class="btn red accent-2" id="btn-close">Close</div>
                     </div>
                     <div id="modal-content"></div>
-                    <div id="modal-card-container" class="row"></div>
                     
                 </div>
 
@@ -74,7 +73,6 @@ class TeamsPage extends HTMLElement {
 
         const modalElement = this.shadow.querySelector('#modal-detail');
         const modalContentContainer = this.shadow.querySelector('#modal-content');
-        const modalCardContainer = this.shadow.querySelector('#modal-card-container');
 
 
         btnProfile.forEach(team => this.detailTeam(team));
@@ -86,9 +84,8 @@ class TeamsPage extends HTMLElement {
         const btnClose = this.shadow.querySelector("#btn-close");
         btnClose.addEventListener('click', function () {
             modalContentContainer.innerHTML = "";
-            modalCardContainer.innerHTML = "";
             modalElement.style.display = "none";
-        })
+        });
 
     }
 
@@ -105,6 +102,8 @@ class TeamsPage extends HTMLElement {
         team.addEventListener("click", async function () {
             const teamId = team.getAttribute('data-teamId');
             const getTeam = await DataApi.getProfileTeam(teamId);
+
+            console.log(`success adding ${getTeam.name} to database`)
             addTeam(getTeam);
         })
 
@@ -143,7 +142,7 @@ class TeamsPage extends HTMLElement {
                 <table class="responsive-table">
                     <tbody>
                     <tr>
-                        <th>Homefield</th>
+                        <th>Home field</th>
                         <td>${venue}</td>
                     </tr>
                     <tr>

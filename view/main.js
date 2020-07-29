@@ -21,6 +21,10 @@ const main = () => {
             component: 'teams-page'
         },
         {
+            path: '/favorites',
+            component: 'favorite-page'
+        },
+        {
             path: '(.*)',
             component: 'page-notfound'
         }
