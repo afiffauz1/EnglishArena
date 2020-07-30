@@ -59,3 +59,25 @@ self.addEventListener("activate", e => {
         })
     )
 });
+
+self.addEventListener("push", function (event) {
+    let body = null;
+    if (event.data) {
+        body = event.data.text();
+    } else {
+        body = "push message no payload"
+    }
+
+    const options = {
+        body: body,
+        vibrate: [100, 50, 100],
+        data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+        }
+    };
+
+    event.waitUntil(
+        self.registration.showNotification("English Arena", options)
+    )
+})

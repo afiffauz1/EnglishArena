@@ -63,8 +63,26 @@ function getFavoriteList() {
     })
 }
 
+function profileTeam(id) {
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction("teamFavorite", "readonly");
+        const profile = tx.objectStore("teamFavorite");
+        const request = profile.get(id);
+        console.log(request)
+
+        request.onsuccess = event => {
+            const result = event.target.result;
+            resolve(result);
+        }
+
+        request.onerror = event => {
+            reject(event.target.errorCode)
+        }
+    })
+}
+
 function deleteFavorite(id) {
     const tx = db.transaction(["teamFavorite"], "readwrite");
     const teamFav = tx.objectStore("teamFavorite");
-    teamFav.delete(id);
+    const request = teamFav.delete(id);
 }

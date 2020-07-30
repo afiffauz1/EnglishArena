@@ -59,7 +59,7 @@ class FavoritePage extends HTMLElement {
                                         </tr>
                                         <tr>
                                         <td>
-                                            <a target="_blank" class="btn red accent-2 deleteFav" data-teamid="${id}">Delete Favorite</a>
+                                            <a class="btn red accent-2 deleteFav" data-teamid="${id}">Delete Favorite</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -80,20 +80,41 @@ class FavoritePage extends HTMLElement {
 
         <h1><span class="grey-text darken-1">Your</span> Favorite teams</h1>
         <div class="row">${team}</div>
+
+        <div id="modal-detail" class="own-modal">
+            <!-- Modal content -->
+            <div class="own-modal-action">
+                <div id="modal-content" class="modal-action">
+                    <a href="/teams" target="_self" id="yesBtn" class="btn medium red accent-2">Delete</a>
+                    <div id="noBtn" class="btn medium">Cancel</div>
+                </div>
+            </div>
+
+        </div>
         `;
 
+        const modalElement = this.shadow.querySelector('#modal-detail');
         const btnDelete = this.shadow.querySelectorAll('.deleteFav');
-        btnDelete.forEach(team => this.deleteFav(team));
-    }
+        const yes = this.shadow.getElementById("yesBtn");
 
-    deleteFav(team) {
-        const idString = team.getAttribute("data-teamid");
-        const id = Number(idString);
-        team.addEventListener("click", function () {
+        let id = null;
+
+        btnDelete.forEach(team => {
+            team.addEventListener("click", function () {
+                modalElement.style.display = "block";
+                const idString = team.getAttribute("data-teamid");
+                id = Number(idString);
+            });
+        });
+
+        yes.addEventListener("click", async function () {
+            console.log(`success delete team with id: ${id}`);
             deleteFavorite(id);
+            modalElement.style.display = "none";
         });
 
     }
+
 }
 
 customElements.define("favorite-page", FavoritePage);

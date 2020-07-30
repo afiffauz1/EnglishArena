@@ -61,7 +61,7 @@ class TeamsPage extends HTMLElement {
                         <div class="btn red accent-2" id="btn-close">Close</div>
                     </div>
                     <div id="modal-content"></div>
-                    
+                    <div id="modal-card-container" class="row"></div>
                 </div>
 
             </div>
@@ -73,6 +73,7 @@ class TeamsPage extends HTMLElement {
 
         const modalElement = this.shadow.querySelector('#modal-detail');
         const modalContentContainer = this.shadow.querySelector('#modal-content');
+        const modalCardContainer = this.shadow.querySelector('#modal-card-container');
 
 
         btnProfile.forEach(team => this.detailTeam(team));
@@ -84,9 +85,9 @@ class TeamsPage extends HTMLElement {
         const btnClose = this.shadow.querySelector("#btn-close");
         btnClose.addEventListener('click', function () {
             modalContentContainer.innerHTML = "";
+            modalCardContainer.innerHTML = "";
             modalElement.style.display = "none";
         });
-
     }
 
     loadingScreen() {

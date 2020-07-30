@@ -48,6 +48,19 @@
     /* Could be more or less, depending on screen size */
 }
 
+.own-modal-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+}
+
 /* The Close Button */
 .close {
     color: #aaa;
