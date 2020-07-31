@@ -6,6 +6,16 @@ const main = () => {
     const sidenavElement = document.querySelectorAll(".sidenav");
     M.Sidenav.init(sidenavElement);
 
+    document.querySelectorAll(".topnav a , .sidenav a").forEach(element => {
+        element.addEventListener("click", function () {
+            const sidenav = document.querySelector(".sidenav");
+            M.Sidenav.getInstance(sidenav).close();
+
+            page = event.target.getAttribute("href").substr(1);
+            loadPage(page);
+        })
+    });
+
     const bodyContent = document.getElementById('body-content');
     const router = new Router(bodyContent);
     router.setRoutes([{

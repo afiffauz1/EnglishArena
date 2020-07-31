@@ -1,4 +1,15 @@
 {
-    "name": "english arena push notification",
+    "name": "English Arena",
+    "short_name": "E-Arena",
+    "description": "unofficial premier league fans web app",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#ff4081",
+    "theme_color": "#ff4081",
+    "icons": [{
+        "src": "englisharena-logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }],
     "gcm_sender_id": "1076620290157"
 }
