@@ -10,9 +10,6 @@ const main = () => {
         element.addEventListener("click", function () {
             const sidenav = document.querySelector(".sidenav");
             M.Sidenav.getInstance(sidenav).close();
-
-            page = event.target.getAttribute("href").substr(1);
-            loadPage(page);
         })
     });
 

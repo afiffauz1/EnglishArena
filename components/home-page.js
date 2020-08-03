@@ -20,7 +20,7 @@ class Homepage extends HTMLElement {
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="../img/banner-table.jpg">
+                    <img class="activator" src="../img/banner-table.jpg" alt="Banner">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Tables</span>
@@ -32,7 +32,7 @@ class Homepage extends HTMLElement {
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="../img/banner-squad.jpg">
+                    <img class="activator" src="../img/banner-squad.jpg" alt="Team">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Teams</span>
@@ -44,7 +44,7 @@ class Homepage extends HTMLElement {
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="../img/banner-fav.jpg">
+                    <img class="activator" src="../img/banner-fav.jpg" alt="Favorite">
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Favorites</span>
