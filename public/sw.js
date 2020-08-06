@@ -15,50 +15,74 @@ workbox.precaching.precacheAndRoute([{
         revision: 1
     },
     {
-        url: "view/main.js"
-    }
-]);
+        url: "view/main.js",
+        revision: 1
+    },
+    {
+        url: "img/banner.jpg",
+        revision: 1
+    },
+    {
+        url: "img/banner-fav.jpg",
+        revision: 1
+    },
+    {
+        url: "img/banner-squad.jpg",
+        revision: 1
+    },
+    {
+        url: "img/banner-table.jpg",
+        revision: 1
+    },
+    {
+        url: "components/favorite-page.js",
+        revision: 1
+    },
+    {
+        url: "components/home-page.js",
+        revision: 1
+    },
+    {
+        url: "components/page-notfound.js",
+        revision: 1
+    },
+    {
+        url: "components/table-page.js",
+        revision: 1
+    },
+    {
+        url: "components/teams-page.js",
+        revision: 1
+    },
+    {
+        url: "css/materialize.min.css",
+        revision: 1
+    },
+    {
+        url: "css/own-style.css",
+        revision: 1
+    },
+    {
+        url: "js/data-api.js",
+        revision: 1
+    },
+    {
+        url: "js/materialize.min.js",
+        revision: 1
+    },
+    {
+        url: "js/vaadin-router.js",
+        revision: 1
+    },
+], {
+    ignoreURLParametersMatching: [/.*/]
+});
 
 workbox.routing.registerRoute(
-    new RegExp('/img/'),
-    new workbox.strategies.CacheFirst({
-        cacheName: "img",
-    })
-);
-
-workbox.routing.registerRoute(
-    new RegExp('/components/'),
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: "components",
-    })
-);
-
-workbox.routing.registerRoute(
-    new RegExp('/css/'),
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: "styles",
-    })
-);
-
-workbox.routing.registerRoute(
-    new RegExp('/js/'),
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: "scripts",
-    })
-);
-
-workbox.routing.registerRoute(
-    new RegExp('https://api.football-data.org/v2/competitions/2021/standings'),
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: "tables",
-    })
-);
-
-workbox.routing.registerRoute(
-    new RegExp('https://api.football-data.org/v2/competitions/2021/teams'),
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: "teams",
-    })
+    (({
+        url
+    }) => url.origin),
+    new workbox.strategies.StaleWhileRevalidate()
 );
 
 self.addEventListener("push", function (event) {
